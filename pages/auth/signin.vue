@@ -54,6 +54,7 @@ export default {
           console.log('登入成功:', cre)
           this.snackbarText = '登入成功:' + cre.user
           this.snackbar = true
+          this.$router.push('/')
         })
         .catch((error) => {
           this.snackbarText = error.message
