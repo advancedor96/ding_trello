@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main class="mycontainer">
       <v-container>
         <div v-if="$fire.auth.currentUser">
           {{ $store.state.user || $fire.auth.currentUser.email }} 已登入。<a href="/auth/signout">登出</a>
@@ -25,3 +25,9 @@ export default {
   }
 }
 </script>
+<style>
+
+.mycontainer{
+  background: linear-gradient(45deg, #2193b0 0%, #6dd5ed 100%);
+}
+</style>

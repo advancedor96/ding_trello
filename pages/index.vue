@@ -24,11 +24,25 @@
       ADD BOARD
     </v-btn>
     <div class="d-flex flex-wrap">
-      <p v-if="boards.length ===0">
+      <p v-if="boards.length === 0">
         目前沒有看板
       </p>
       <v-card v-for="(b, idx) in boards" :key="idx" class="jello-board-tile">
-        <v-card-title>{{ b.title }} </v-card-title>
+        <v-card-title>
+          {{ b.title }}
+          <v-menu offest-y>
+            <template #activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item @click="deleteBoard(b.title)">
+                <v-list-item-title>刪除</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-card-title>
         <v-card-subtitle>{{ b.color }} </v-card-subtitle>
       </v-card>
     </div>
@@ -45,13 +59,23 @@ export default {
     },
     boards: []
   }),
-  created () {
-
-  },
+  created () {},
   mounted () {
     this.load()
   },
   methods: {
+    deleteBoard (title) {
+      this.$fire.firestore
+        .collection(`users/${this.$store.state.user}/boards/`)
+        .doc(title)
+        .delete()
+        .then(() => {
+          this.load()
+        })
+        .catch((err) => {
+          console.log('刪除時發生錯誤', err)
+        })
+    },
     load () {
       this.boards = []
       this.$fire.firestore
