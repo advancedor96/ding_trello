@@ -10,6 +10,12 @@
         </v-card-title>
         <v-card-text>
           <v-text-field v-model="board.title" label="Board title" />
+          <v-color-picker
+            v-model="board.color"
+            dot-size="25"
+            hide-inputs
+            swatches-max-height="100"
+          />
           <v-text-field v-model="board.color" label="Board color" />
         </v-card-text>
         <v-card-actions>
@@ -27,7 +33,12 @@
       <p v-if="boards.length === 0">
         目前沒有看板
       </p>
-      <v-card v-for="(b, idx) in boards" :key="idx" class="jello-board-tile">
+      <v-card
+        v-for="(b, idx) in boards"
+        :key="idx"
+        class="jello-board-tile"
+        :style="b.color.startsWith('#')? `background-color:${b.color}`: null "
+      >
         <v-card-title>
           {{ b.title }}
           <v-menu offest-y>
