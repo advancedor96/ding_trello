@@ -46,6 +46,7 @@
         :style="
           b.image && b.image.downloadURL? `background:url(${b.image.downloadURL})`:
           b.color.startsWith('#')? `background-color:${b.color}`: null "
+        @click="$router.push('/board/' + b.id)"
       >
         <v-card-title>
           {{ b.title }}
@@ -69,10 +70,12 @@
 
 <script>
 import tinycolor from 'tinycolor2'
+import { v4 as uuidv4 } from 'uuid'
 export default {
   data: () => ({
     dialog: false,
     board: {
+      id: '',
       title: '',
       color: '',
       image: {
@@ -131,6 +134,7 @@ export default {
         })
     },
     addBoard () {
+      this.board.id = uuidv4()
       this.dialog = true
     },
     createBoard () {
