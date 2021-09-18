@@ -25,7 +25,7 @@
         </v-card-text>
         <v-card-actions>
           <v-btn @click="createBoard">
-            送出
+            送 出
           </v-btn>
         </v-card-actions>
       </v-card>
