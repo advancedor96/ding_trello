@@ -58,7 +58,7 @@
             </template>
             <v-list>
               <v-list-item @click="deleteBoard(b.title)">
-                <v-list-item-title>刪除</v-list-item-title>
+                <v-list-item-title>刪 除</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
